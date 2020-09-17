@@ -36,6 +36,10 @@ public class Log {
         }
         return jac.toString();
     }
+    public boolean clearLogs(){
+        File dir = new File (context.getFilesDir()+"/"+FILE_NAME);
+        return dir.delete(); 
+    }
 
     public static void init(Context c){
         com.diusframi.android.logs2json.Log.init(c,4);
