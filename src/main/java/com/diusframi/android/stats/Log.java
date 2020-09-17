@@ -38,7 +38,7 @@ public class Log {
     }
     public boolean clearLogs(){
         File dir = new File (context.getFilesDir()+"/"+FILE_NAME);
-        return dir.delete(); 
+        return dir.delete();
     }
 
     public static void init(Context c){
