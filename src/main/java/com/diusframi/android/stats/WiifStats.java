@@ -81,7 +81,7 @@ public class WiifStats {
             Log.d("connected to mobile: "+ mobile);
             if (wifi) {
                 Log.d("wifi strength: "+getWifiSignalStrength(context));
-                Log.d("wifi name: "+getWifiSsid(context));
+                Log.d("wifi name: "+getWifiSsid(context).replace("\"",""));
                 Log.d("wifi ip: "+getWifiIp(context));
             }
         }
