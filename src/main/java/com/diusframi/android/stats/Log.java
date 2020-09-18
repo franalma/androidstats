@@ -37,8 +37,17 @@ public class Log {
         return jac.toString();
     }
     public boolean clearLogs(){
-        File dir = new File (context.getFilesDir()+"/"+FILE_NAME);
-        return dir.delete();
+        File file = new File (context.getFilesDir()+"/"+FILE_NAME);
+        boolean res = file.delete();
+        if (res){
+            try{
+                res = file.createNewFile();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+        return res; 
     }
 
     public static void init(Context c){

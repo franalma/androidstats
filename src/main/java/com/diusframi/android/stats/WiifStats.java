@@ -77,7 +77,6 @@ public class WiifStats {
         public void onReceive(Context context, Intent intent) {
             boolean wifi = info.getType() == ConnectivityManager.TYPE_WIFI;
             boolean mobile = info.getType() == ConnectivityManager.TYPE_MOBILE;
-            System.out.println("-----recevied netvowrk");
             Log.d("connected to wifi: "+ wifi);
             Log.d("connected to mobile: "+ mobile);
             if (wifi) {
