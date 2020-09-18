@@ -30,12 +30,21 @@ public class WiifStats {
         Log.d("isConnectedToWifi: "+ isConnected);
 
         if (networkReceiver != null){
-            context.unregisterReceiver(networkReceiver);
+            try{
+                context.unregisterReceiver(networkReceiver);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
         }
         networkReceiver = new NetworkConnectionChangeReceiver();
         IntentFilter wifiStatus = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         context.registerReceiver(networkReceiver, wifiStatus);
 
+    }
+
+    public void stop(Context context){
+        context.unregisterReceiver(networkReceiver);
     }
 
     public int getWifiSignalStrength(Context context){
@@ -75,15 +84,18 @@ public class WiifStats {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            boolean wifi = info.getType() == ConnectivityManager.TYPE_WIFI;
-            boolean mobile = info.getType() == ConnectivityManager.TYPE_MOBILE;
-            Log.d("connected to wifi: "+ wifi);
-            Log.d("connected to mobile: "+ mobile);
-            if (wifi) {
-                Log.d("wifi strength: "+getWifiSignalStrength(context));
-                Log.d("wifi name: "+getWifiSsid(context).replace("\"",""));
-                Log.d("wifi ip: "+getWifiIp(context));
+            if (info != null){
+                boolean wifi = info.getType() == ConnectivityManager.TYPE_WIFI;
+                boolean mobile = info.getType() == ConnectivityManager.TYPE_MOBILE;
+                Log.d("connected to wifi: "+ wifi);
+                Log.d("connected to mobile: "+ mobile);
+                if (wifi) {
+                    Log.d("wifi strength: "+getWifiSignalStrength(context));
+                    Log.d("wifi name: "+getWifiSsid(context).replace("\"",""));
+                    Log.d("wifi ip: "+getWifiIp(context));
+                }
             }
+
         }
     }
 }

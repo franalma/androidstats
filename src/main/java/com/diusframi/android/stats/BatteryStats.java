@@ -29,12 +29,21 @@ public class BatteryStats {
             filter.addAction(Intent.ACTION_BATTERY_LOW);
             filter.addAction(Intent.ACTION_BATTERY_OKAY);
             if (batteryReceiver != null){
-                context.unregisterReceiver(batteryReceiver);
+                try{
+                    context.unregisterReceiver(batteryReceiver);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }
             batteryReceiver = new BatteryReceiver();
             batteryStatus = context.registerReceiver(batteryReceiver, filter);
 
         }
+    }
+
+    public void stop(Context context){
+        context.unregisterReceiver(batteryReceiver);
     }
 
 

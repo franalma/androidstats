@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 
 public class Log {
     com.diusframi.android.logs2json.Log logger;
@@ -38,14 +39,14 @@ public class Log {
     }
     public boolean clearLogs(){
         File file = new File (context.getFilesDir()+"/"+FILE_NAME);
-        boolean res = file.delete();
-        if (res){
-            try{
-                res = file.createNewFile();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
+        boolean res = true;
+        try{
+            res = file.delete();
+            res = file.createNewFile();
+//            FileWriter writer = new FileWriter(file);
+//            writer.close();
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return res;
     }
