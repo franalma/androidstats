@@ -47,7 +47,7 @@ public class Log {
             }
 
         }
-        return res; 
+        return res;
     }
 
     public static void init(Context c){
